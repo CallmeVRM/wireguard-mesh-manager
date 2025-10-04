@@ -45,22 +45,22 @@ WireGuard Mesh Manager is a lightweight web interface designed to easily manage 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/wg-mesh-manager.git
-cd wg-mesh-manager
+git clone https://github.com/yourusername/wireguard-mesh-manager.git
+cd wireguard-mesh-manager
 ```
 
 ### 2. Build the container
 ```bash
-podman build -t wg-mesh-manager .
+podman build -t wireguard-mesh-manager .
 ```
 
 ### 3. Run the container
 ```bash
 podman run -d \
   -p 8000:8000 \
-  --name wg-mesh-manager \
+  --name wireguard-mesh-manager \
   -v $(pwd)/data:/data \
-  wg-mesh-manager
+  wireguard-mesh-manager
 ```
 
 ### 4. Access the application
