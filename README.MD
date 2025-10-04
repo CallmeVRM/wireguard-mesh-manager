@@ -40,6 +40,9 @@ WireGuard Mesh Manager is a lightweight web interface designed to easily manage 
 └── README.md             # Project documentation
 ```
 
+## Disclaimer : 
+If you are on Docker, ~~just use Podman for more safety~~, joking 😄 — when you type a command, just replace the word `podman` with `docker`.
+
 ## 🚀 Installation
 
 ### 1. Clone the repository
@@ -54,9 +57,11 @@ cd wireguard-mesh-manager
 podman build -t wireguard-mesh-manager .
 ```
 
-### 3. Run the container
+### 3. Run the container from a local image
+
+#### Podman Version
 ```bash
-podman run -d \
+docker run -d \
   -p 8000:8000 \
   --name wireguard-mesh-manager \
   -v $(pwd)/data:/data \
@@ -66,14 +71,28 @@ podman run -d \
 ### 4. Access the application
 Open your browser and navigate to: http://localhost:8000
 
+podman login
+podman tag localhost/wireguard-mesh-manager:latest <your_username_or_org>/wireguard-mesh-manager:latest
+podman push <your_username_or_org>/wireguard-mesh-manager:latest
+podman pull docker.io/<your_username_or_org>/wireguard-mesh-manager:latest
 
-
+PS : If you’ve enabled 2FA on Docker Hub (and you should do it), you must use a Personal Access Token instead of your password when logging in via docker login.
 
 ---
 
 ## Use it as a container :
 ### Download the Container Image
 If you prefer to download the pre-built container image, you can use the following command:
+
+### 3. Run the container from a remote image
+
+```bash
+docker run -d \
+  -p 8000:8000 \
+  --name wireguard-mesh-manager \
+  -v $(pwd)/data:/data \
+  callmevrm/wireguard-mesh-manager
+```
 
 ```bash
 podman run -d \
@@ -85,12 +104,6 @@ podman run -d \
 
 ### 4. Access the application
 Open your browser and navigate to: http://localhost:8000
-
-
-
-
-
-
 
 
 ## 📜 License
