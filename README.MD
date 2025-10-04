@@ -61,7 +61,7 @@ podman build -t wireguard-mesh-manager .
 
 #### Podman Version
 ```bash
-docker run -d \
+podman run -d \
   -p 8000:8000 \
   --name wireguard-mesh-manager \
   -v $(pwd)/data:/data \
@@ -71,28 +71,21 @@ docker run -d \
 ### 4. Access the application
 Open your browser and navigate to: http://localhost:8000
 
+### 5. To push your image on a remote repository (docker.io) in this example :
 podman login
 podman tag localhost/wireguard-mesh-manager:latest <your_username_or_org>/wireguard-mesh-manager:latest
 podman push <your_username_or_org>/wireguard-mesh-manager:latest
 podman pull docker.io/<your_username_or_org>/wireguard-mesh-manager:latest
 
-PS : If you’ve enabled 2FA on Docker Hub (and you should do it), you must use a Personal Access Token instead of your password when logging in via docker login.
+PS : If you’ve enabled 2FA on Docker Hub (and you should do), you must use a Personal Access Token instead of your password when logging in via docker login.
 
 ---
 
 ## Use it as a container :
 ### Download the Container Image
-If you prefer to download the pre-built container image, you can use the following command:
+If you prefer to download the pre-built container image from my repository, you can use the following command:
 
 ### 3. Run the container from a remote image
-
-```bash
-docker run -d \
-  -p 8000:8000 \
-  --name wireguard-mesh-manager \
-  -v $(pwd)/data:/data \
-  callmevrm/wireguard-mesh-manager
-```
 
 ```bash
 podman run -d \
