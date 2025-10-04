@@ -59,5 +59,39 @@ Désormais vous pouvez :
 - Ou, de manière plus élégante et automatisée, les déployer via un playbook ou un rôle Ansible, parce que, soyons honnêtes, vous n’êtes pas des galériens, mais des fainéants intelligents 😄
 
 
+---
+Bonus : Déploiement via Ansible
+
+## 🧱 Structure du projet
+```bash
+ansible/
+├── inventory.ini
+├── playbook_wireguard.yml
+└── roles/
+    └── wireguard_deploy/
+        ├── tasks/
+        │   ├── main.yml
+        │   ├── verify.yml
+        │   └── rollback.yml
+        ├── handlers/
+        │   └── main.yml
+        └── files/
+            ├── node01.conf
+            ├── node02.conf
+            ├── node03.conf
+```
+
+## 🗂️ inventory.ini
+Chaque serveur est associé à son fichier de configuration :
+PS : `wg_conf_file=node-prod-services-ipv4.conf  (selon la convention, node-<nom_que_vous_avez_choisis>.conf)`
+```bash
+[wireguard_nodes]
+prod-services-ipv4 ansible_host=20.51.131.162 wg_conf_file=node-prod-services-ipv4.conf
+prod-databases-ipv4 ansible_host=172.190.75.205 wg_conf_file=node-prod-databases-ipv4.conf
+prod-monitoring-ipv4 ansible_host=14.236.132.228 wg_conf_file=node-prod-monitoring-ipv4.conf
+```
+
+
+
 
 
