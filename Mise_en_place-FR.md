@@ -1,7 +1,7 @@
 
-Veillez à ouvrir le port que vous souhaitez utiliser au niveau du pare-feu.
+- Veillez à ouvrir le port que vous souhaitez utiliser au niveau du pare-feu.
 
-Il existe une convention de nommage à respecter afin de pouvoir ensuite utiliser Ansible pour déployer automatiquement les fichiers de configuration sur les nœuds.
+- Il existe une convention de nommage à respecter afin de pouvoir ensuite utiliser Ansible pour déployer automatiquement les fichiers de configuration sur les nœuds.
 
 
 L’application WireGuard-Mesh-Manager génère des fichiers avec un préfixe de type node-xxx.conf.
