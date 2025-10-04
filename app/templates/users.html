@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+  <div class="button-row">
+    <a class="button light" href="/">Dashboard</a>
+    <a class="button light" href="/nodes">Nœuds</a>
+    <a class="button light" href="/overview">Aperçu</a>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Ajouter un utilisateur</h2>
+  <form action="/users/add" method="post" class="form-vertical">
+    <div class="form-grid">
+      <div class="field">
+        <label for="name">Nom</label>
+        <input id="name" name="name" type="text" placeholder="alice" required>
+      </div>
+      <div class="field">
+        <label for="mtu">MTU</label>
+        <input id="mtu" name="mtu" type="number" value="1420">
+      </div>
+      <div class="field">
+        <label for="vpn_ip">IP VPN (optionnel)</label>
+        <input id="vpn_ip" name="vpn_ip" type="text" placeholder="10.100.10.x">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="button">Ajouter</button>
+    </div>
+  </form>
+</div>
+
+<div class="card">
+  <h2>Liste des utilisateurs</h2>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Nom</th><th>IP VPN</th><th>MTU</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u["id"] }}</td>
+        <td>{{ u["name"] }}</td>
+        <td>{{ u["vpn_ip"] or '-' }}</td>
+        <td>{{ u["mtu"] or '-' }}</td>
+        <td>
+          <div class="action-block">
+            <form action="/users/update-vpn-ip" method="post">
+              <input type="hidden" name="user_id" value="{{ u['id'] }}">
+              <input class="table-action-input" name="new_vpn_ip" placeholder="Nouvelle IP VPN (10.100.10.x)">
+              <button class="button sm" type="submit">MAJ VPN</button>
+            </form>
+            <form action="/users/delete" method="post" onsubmit="return confirm('Supprimer cet utilisateur ?');">
+              <input type="hidden" name="user_id" value="{{ u['id'] }}">
+              <button type="submit" class="icon-btn" title="Supprimer">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M3 6h18v2H3V6zm2 3h14l-1.5 12.5a1 1 0 01-1 .5H7a1 1 0 01-1-.5L4 9zm5-6h6v2H9V3z"/>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5" class="muted">Aucun utilisateur enregistré.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

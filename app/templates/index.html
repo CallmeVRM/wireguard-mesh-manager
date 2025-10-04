@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% set notice = request.query_params.get('notice') %}
+{% if notice %}
+<div class="notice {% if notice in ['gen-ok'] %}success{% elif notice in ['configs-cleared','db-reset'] %}warn{% else %}info{% endif %}">
+  {% if notice == 'gen-ok' %}
+    ✅ Fichiers de configurations générées, vous pouvez désormais les télécharger.
+  {% elif notice == 'configs-cleared' %}
+    🧹 Tous les fichiers .conf ont été effacés.
+  {% elif notice == 'db-reset' %}
+    ♻️ Base de données réinitialisée et configs supprimées.
+  {% else %}
+    ℹ️ Action effectuée.
+  {% endif %}
+</div>
+{% endif %}
+
+<div class="card card-tight">
+  <h2 class="card-title">Dashboard</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-accent"></div>
+      <div class="stat-value">{{ nodes|length }}</div>
+      <div class="stat-label">Nœuds</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-accent"></div>
+      <div class="stat-value">{{ users|length }}</div>
+      <div class="stat-label">Utilisateurs</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-tight">
+  <h2 class="card-title">Gestion</h2>
+  <div class="button-grid">
+    <a class="button light has-tip" href="/nodes"
+       data-tip="Accéder à la gestion des nœuds (ajout, IP publique/VPN, MTU, port).">
+      Gérer les nœuds
+    </a>
+
+    <a class="button light has-tip" href="/users"
+       data-tip="Accéder à la gestion des utilisateurs (ajout, IP VPN, MTU).">
+      Gérer les utilisateurs
+    </a>
+
+    <a class="button light has-tip" href="/overview"
+       data-tip="Voir l’aperçu global : nœuds et utilisateurs avec IP/ports/MTU/clés.">
+      Aperçu
+    </a>
+  </div>
+</div>
+
+<div class="card card-tight">
+  <h2 class="card-title">Opérations</h2>
+
+  <div class="ops-row">
+    <form action="/genmesh" method="post" class="inline-form">
+      <button type="submit" class="button light wide has-tip"
+              data-tip="Générer ou regénérer les fichiers de configuration WireGuard pour tous les nœuds et utilisateurs.">
+        Générer / Regénérer
+      </button>
+    </form>
+
+    <a class="button light wide has-tip" href="/configs/all.zip"
+       data-tip="Télécharger toutes les configurations générées dans un fichier ZIP.">
+      Télécharger
+    </a>
+  </div>
+
+  <div class="ops-row">
+    <form action="/configs/clear" method="post" class="inline-form"
+          onsubmit="return confirm('Effacer tous les fichiers .conf générés ?');">
+      <button type="submit" class="button dark wide has-tip"
+              data-tip="Effacer les fichiers de configuration générés précédemment (les données en base restent).">
+        Effacer
+      </button>
+    </form>
+
+    <form action="/reset-db" method="post" class="inline-form"
+          onsubmit="return confirm('Réinitialiser la base et supprimer toutes les configs ? Action irréversible.');">
+      <button type="submit" class="button danger wide has-tip"
+              data-tip="Effacer toutes les données dans la base de données et supprimer les fichiers de configuration.">
+        Réinitialiser
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

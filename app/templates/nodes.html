@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+  <div class="button-row">
+    <a class="button light" href="/">Dashboard</a>
+    <a class="button light" href="/users">Utilisateurs</a>
+    <a class="button light" href="/overview">Aperçu</a>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Ajouter un nœud</h2>
+  <form action="/nodes/add" method="post" class="form-vertical">
+    <div class="form-grid">
+      <div class="field">
+        <label for="name">Nom</label>
+        <input id="name" name="name" type="text" placeholder="ex: node1" required>
+      </div>
+      <div class="field">
+        <label for="public_ip">IP publique</label>
+        <input id="public_ip" name="public_ip" type="text" placeholder="203.0.113.5" required>
+      </div>
+      <div class="field">
+        <label for="port">Port</label>
+        <input id="port" name="port" type="number" value="51820" required>
+      </div>
+      <div class="field">
+        <label for="mtu">MTU</label>
+        <input id="mtu" name="mtu" type="number" value="1420">
+      </div>
+      <div class="field">
+        <label for="vpn_ip">IP VPN (RFC 1918)</label>
+        <input id="vpn_ip" name="vpn_ip" type="text" placeholder="10.100.10.x">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="button">Ajouter</button>
+    </div>
+  </form>
+</div>
+
+<div class="card">
+  <h2>Liste des nœuds</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Nom</th><th>IP publique</th><th>IP VPN</th><th>Port</th><th>MTU</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for n in nodes %}
+      <tr>
+        <td>{{ n["id"] }}</td>
+        <td>{{ n["name"] }}</td>
+        <td>{{ n["public_ip"] or '-' }}</td>
+        <td>{{ n["vpn_ip"] or '-' }}</td>
+        <td>{{ n["port"] or '-' }}</td>
+        <td>{{ n["mtu"] or '-' }}</td>
+        <td>
+          <div class="actions-stack">
+            <div class="action-block">
+              <form action="/nodes/update-ip" method="post">
+                <input type="hidden" name="node_id" value="{{ n['id'] }}">
+                <input class="table-action-input" name="new_ip" placeholder="Nouvelle IP publique">
+                <button class="button sm" type="submit">MAJ IP</button>
+              </form>
+              <form action="/nodes/delete" method="post" onsubmit="return confirm('Supprimer ce nœud ?');">
+                <input type="hidden" name="node_id" value="{{ n['id'] }}">
+                <button type="submit" class="icon-btn" title="Supprimer">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M3 6h18v2H3V6zm2 3h14l-1.5 12.5a1 1 0 01-1 .5H7a1 1 0 01-1-.5L4 9zm5-6h6v2H9V3z"/>
+                  </svg>
+                </button>
+              </form>
+            </div>
+            <form action="/nodes/update-vpn-ip" method="post" class="action-block">
+              <input type="hidden" name="node_id" value="{{ n['id'] }}">
+              <input class="table-action-input" name="new_vpn_ip" placeholder="Nouvelle IP VPN (10.100.10.x)">
+              <button class="button sm" type="submit">MAJ VPN</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7" class="muted">Aucun nœud enregistré.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

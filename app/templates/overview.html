@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- NAV CARD EN HAUT + bouton Dashboard demandé -->
+<div class="card">
+  <div class="button-row">
+    <a class="button light" href="/">Dashboard</a>
+    <a class="button light" href="/nodes">Nœuds</a>
+    <a class="button light" href="/users">Utilisateurs</a>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Aperçu</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Nom</th>
+        <th>IP publique</th>
+        <th>IP VPN</th>
+        <th>Port</th>
+        <th>MTU</th>
+        <th>Clé publique</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for n in nodes %}
+      <tr>
+        <td>Nœud</td>
+        <td>{{ n["name"] }}</td>
+        <td>{{ n["public_ip"] or "-" }}</td>
+        <td>{{ n["vpn_ip"] or "-" }}</td>
+        <td>{{ n["port"] or "-" }}</td>
+        <td>{{ n["mtu"] or "-" }}</td>
+        <td><code class="code">{{ n["public_key"] or "-" }}</code></td>
+      </tr>
+      {% endfor %}
+      {% for u in users %}
+      <tr>
+        <td>Utilisateur</td>
+        <td>{{ u["name"] }}</td>
+        <td>-</td>
+        <td>{{ u["vpn_ip"] or "-" }}</td>
+        <td>-</td>
+        <td>{{ u["mtu"] or "-" }}</td>
+        <td><code class="code">{{ u["public_key"] or "-" }}</code></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

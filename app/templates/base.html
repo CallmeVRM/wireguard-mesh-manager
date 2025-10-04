@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wireguard Mesh Manager</title>
+
+  <!-- Favicon simple PNG -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', path='favicon.png') }}">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+  <header class="app-header">
+    <a href="/" class="brand" aria-label="Accueil WG Mesh Manager">
+      <img class="brand-logo" src="{{ url_for('static', path='wireguard.png') }}" alt="WireGuard" />
+      <span class="brand-title">Wireguard Mesh Manager</span>
+    </a>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <span class="muted">Ce projet est distribué sous licence <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>.</span>
+    <span class="muted">© {{ 2025 }} Wireguard Mesh Manager - Lotfi Hamadene - </span>
+    <span class="muted">WireGuard® est une marque déposée de Jason A. Donenfeld</span>
+
+  </footer>
+</body>
+</html>
