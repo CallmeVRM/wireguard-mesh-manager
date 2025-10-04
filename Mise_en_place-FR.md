@@ -6,10 +6,10 @@
 
 L’application WireGuard-Mesh-Manager génère des fichiers avec un préfixe de type node-xxx.conf.
 Dans cet exemple, j’utilise les noms de nœuds suivants :
-` 
-`node-prod-services-ipv4.conf`
-`node-prod-databases-ipv4.conf`
-`node-prod-monitoring-ipv4.conf`
+
+```node-prod-services-ipv4.conf```
+```node-prod-databases-ipv4.conf```
+```node-prod-monitoring-ipv4.conf```
 
 ### Accédez à l’onglet Gérer les nœuds :
 <img width="1852" height="1035" alt="image" src="https://github.com/user-attachments/assets/77a0c938-b218-463c-9602-736c3004033b" />
