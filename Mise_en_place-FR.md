@@ -60,7 +60,7 @@ Désormais vous pouvez :
 
 
 ---
-Bonus : Déploiement via Ansible  > lien vers le repo
+Bonus : Déploiement via Ansible  > [lien vers le repo](https://github.com/CallmeVRM/wireguard-mesh-manager-ansible-deploy)
 
 
 
