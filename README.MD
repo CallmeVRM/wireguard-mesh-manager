@@ -72,11 +72,12 @@ podman run -d \
 Open your browser and navigate to: http://localhost:8000
 
 ### 5. To push your image on a remote repository (docker.io) in this example :
+```bash
 podman login
 podman tag localhost/wireguard-mesh-manager:latest <your_username_or_org>/wireguard-mesh-manager:latest
 podman push <your_username_or_org>/wireguard-mesh-manager:latest
 podman pull docker.io/<your_username_or_org>/wireguard-mesh-manager:latest
-
+```
 PS : If you’ve enabled 2FA on Docker Hub (and you should do), you must use a Personal Access Token instead of your password when logging in via docker login.
 
 ---
