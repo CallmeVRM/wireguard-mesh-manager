@@ -80,7 +80,7 @@ podman run -d \
   -p 8000:8000 \
   --name wg-mesh-manager \
   -v $(pwd)/data:/data \
-  yourregistry.com/wg-mesh-manager:latest
+  docker.io/callmevrm/wireguard-mesh-manager:latest
 ```
 
 ### 4. Access the application
