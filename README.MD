@@ -41,7 +41,7 @@ WireGuard Mesh Manager is a lightweight web interface designed to easily manage 
 ```
 
 ## Disclaimer : 
-If you are on Docker, ~~just use Podman for more safety~~, joking 😄 — when you type a command, just replace the word `podman` with `docker`.
+If you are on Docker, ~~just use Podman for more safety~~😄 — when you type a command, just replace the word `podman` with `docker`.
 
 ## 🚀 Installation
 
